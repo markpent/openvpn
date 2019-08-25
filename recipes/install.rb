@@ -17,7 +17,7 @@
 # limitations under the License.
 
 include_recipe 'yum-epel' if platform_family?('rhel')
-include_recipe 'openvpn::apt-repo' if platform_family?('debian')
+include_recipe 'openvpn::apt-repo' if platform_family?('debian') && node['platform_version'].to_f < 10.0 #openvpn repository does not support buster
 
 if node['openvpn']['git_package'] == true
   package 'openvpn-git'
